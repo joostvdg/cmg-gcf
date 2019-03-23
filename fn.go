@@ -30,11 +30,13 @@ func extractIntParamOrDefault(request *http.Request, paramName string, defaultVa
 func getMap(w http.ResponseWriter, r *http.Request) {
 	log.Println("Request params were:", r.URL.Query())
 
+	gameType := game.NormalGame
 	gameTypeValue := 0
 	gameTypeParam := r.URL.Query().Get("type")
 	gameTypeParamValue := fmt.Sprintf("%v",gameTypeParam)
 	if gameTypeParamValue == "large" {
 		gameTypeValue = 1
+		gameType = game.LargeGame
 	}
 
 	min := extractIntParamOrDefault(r, "min", 165)
@@ -53,12 +55,6 @@ func getMap(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Println("Rules: ", rules)
 
-	gameType := game.NormalGame
-	if rules.GameType == 0 {
-		gameType = game.NormalGame
-	} else if rules.GameType == 1 {
-		gameType = game.LargeGame
-	}
 	verbose := false
 	numberOfLoops := 1
 	totalGenerations := 0

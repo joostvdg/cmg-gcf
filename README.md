@@ -8,6 +8,20 @@ Google Cloud Function wrapper for CMG
 gcloud functions deploy cmg --entry-point Cmg --runtime go111 --trigger-http
 ```
 
+## use
+
+### Normal Game
+
+```bash
+http https://europe-west1-kearos-gcp.cloudfunctions.net/cmg
+```
+
+### 6 Player Game
+
+```bash
+http "https://europe-west1-kearos-gcp.cloudfunctions.net/cmg?type=large&max=365&min=156&minr=65&max300=22"
+```
+
 ## Go mod
 
 Make sure the `go.mod` is compatible with Go 1.11, as this is currently the only supported runtime.
